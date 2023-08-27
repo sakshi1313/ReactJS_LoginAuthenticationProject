@@ -144,8 +144,22 @@ router.get('/api/about',authenticate,(req,res) => {
     res.send(req.rootUser)
 })
 
+router.get('/api/contact',authenticate,(req,res) => {
+    console.log("contact")
+    res.send(req.rootUser)
+
+})
+
+router.get('/api/logout',(req,res) => {
+    console.log("LOgout ")
+    res.clearCookie('jwttoken',{path:'/'});
+    res.status(200).send("User Logout")
+})
+
 router.get('/home',(req,res) => {
     res.send("home")
 })
+
+
 
 module.exports=router;

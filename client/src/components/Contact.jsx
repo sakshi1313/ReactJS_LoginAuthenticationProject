@@ -1,8 +1,88 @@
-import React from "react";
+import React ,{useEffect, useState} from "react";
 import { NavLink } from "react-router-dom";
 
 
 const Contact =() => {
+
+    const [userData, setUserData] = useState({})
+
+
+    const ContactPage = async() => {
+        try{
+            console.log("contact page");
+
+            const res = await fetch('/api/contact',{
+                method: "GET",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+
+            }) // backend se response milta h
+
+            const data = await res.json(); 
+            /// ye data aapke server ,me jo route h jo fetch ho rhe(get)...wha se jo res.send h...vo aa rha h
+            console.log(data);
+            setUserData(data);
+
+            if(!res.status === 200)
+            {
+                // authentication failed
+                const error = new Error(res.error)
+                throw error;
+            }
+        }
+        catch(err)
+        {
+            console.log(err)
+            navigate('/login')
+        }
+    }
+
+    useEffect(() => {
+        ContactPage();
+    },[]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <div>
             <section className="signup">
@@ -18,6 +98,7 @@ const Contact =() => {
                                         </i>
                                     </label>
                                     <input type="email" name="email" id="email" autoComplete="off"
+                                        value={userData.email}
                                         placeholder="Your email"
 
                                     />
@@ -29,6 +110,7 @@ const Contact =() => {
                                         </i>
                                     </label>
                                     <input type="text" name="name" id="name" autoComplete="off"
+                                        value={userData.name}
                                         placeholder="name"
 
                                     />

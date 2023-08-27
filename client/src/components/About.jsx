@@ -7,7 +7,7 @@ const About =() => {
     const [userData, setUserData] = useState({})
 
 
-    const callAboutPage = async() => {
+    const AboutPage = async() => {
         try{
             console.log("about pahge");
 
@@ -44,7 +44,7 @@ const About =() => {
     }
 
     useEffect(() => {
-        callAboutPage();
+        AboutPage();
     },[]);
 
 
